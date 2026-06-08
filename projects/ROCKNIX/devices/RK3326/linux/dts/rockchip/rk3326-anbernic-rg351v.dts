@@ -76,7 +76,7 @@
 
 &internal_display {
 	compatible = "anbernic,rg351v-panel", "sitronix,st7703";
-	reset-gpios = <&gpio3 RK_PD3 GPIO_ACTIVE_HIGH>;
+	reset-gpios = <&gpio3 RK_PD3 GPIO_ACTIVE_LOW>;
 	vcc-supply = <&vcc_lcd>;
 	iovcc-supply = <&vcc_lcd>;
 };

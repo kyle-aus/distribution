@@ -99,7 +99,25 @@
  	{ .compatible = "gameforce,chi-panel", .data = &gameforcechi_desc },
 --- a/drivers/gpu/drm/panel/panel-newvision-nv3051d.c
 +++ b/drivers/gpu/drm/panel/panel-newvision-nv3051d.c
-@@ -525,7 +525,6 @@
+@@ -492,17 +492,6 @@
+ 	},
+ };
+
+-static const struct nv3051d_panel_info nv3051d_rg351v_info = {
+-	.display_modes = nv3051d_rgxx3_modes,
+-	.num_modes = ARRAY_SIZE(nv3051d_rgxx3_modes),
+-	.width_mm = 70,
+-	.height_mm = 57,
+-	.bus_flags = DRM_BUS_FLAG_DE_LOW | DRM_BUS_FLAG_PIXDATA_DRIVE_NEGEDGE,
+-	.mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST |
+-		      MIPI_DSI_MODE_LPM | MIPI_DSI_MODE_NO_EOT_PACKET |
+-		      MIPI_DSI_CLOCK_NON_CONTINUOUS,
+-};
+-
+ static const struct nv3051d_panel_info nv3051d_rg353p_info = {
+ 	.display_modes = nv3051d_rgxx3_modes,
+ 	.num_modes = ARRAY_SIZE(nv3051d_rgxx3_modes),
+@@ -514,7 +503,6 @@
  };
 
  static const struct of_device_id newvision_nv3051d_of_match[] = {
