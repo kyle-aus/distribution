@@ -15,6 +15,7 @@
        aliases {
                mmc0 = &sdio;
                mmc1 = &sdmmc;
+               mmc2 = &emmc;
        };
 
         gpio-keys-vol {
@@ -60,6 +61,11 @@
 		pwms = <&pwm0 0 1000000 0>;
 		pwm-names = "enable";
 	};
+
+	emmc_pwrseq: mmc-pwrseq {
+		compatible = "mmc-pwrseq-emmc";
+		reset-gpios = <&gpio1 RK_PB3 GPIO_ACTIVE_HIGH>;
+	};
 };
 
 /* conflicts with pwm vibration motor */
@@ -69,9 +75,10 @@
 /delete-node/ &gpio_led;
 
 &internal_display {
-	compatible = "anbernic,rg351v-panel", "newvision,nv3051d";
+	compatible = "anbernic,rg351v-panel", "sitronix,st7703";
+	reset-gpios = <&gpio3 RK_PD3 GPIO_ACTIVE_HIGH>;
+	vcc-supply = <&vcc_lcd>;
 	iovcc-supply = <&vcc_lcd>;
-	vdd-supply = <&vcc_lcd>;
 };
 
 &io_domains {
@@ -85,6 +92,23 @@
 };
 
 /delete-node/ &pwm3;
+
+/* sfc_clk and emmc_clk both use GPIO1_B1 — disable SFC to free the pin for eMMC */
+&sfc {
+	status = "disabled";
+};
+
+&emmc {
+	status = "okay";
+	no-sdio;
+	no-sd;
+	disable-wp;
+	non-removable;
+	num-slots = <1>;
+	vmmc-supply = <&vcc_3v3>;
+	vqmmc-supply = <&vcc_1v8>;
+	mmc-pwrseq = <&emmc_pwrseq>;
+};
 
 &uart5 {
 	pinctrl-names = "default";
