@@ -86,6 +86,12 @@
 
 /delete-node/ &pwm3;
 
+&uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart5_xfer>;
+	status = "okay";
+};
+
 &rk817_charger {
        /* This device does not have a current sense resistor */
        rockchip,resistor-sense-micro-ohms = <0>;
