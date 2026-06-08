@@ -1,0 +1,13 @@
+--- a/src/sdio.c
++++ b/src/sdio.c
+@@ -710,7 +710,11 @@ out:
+
+ 	host->io_ops = &sdio_host_ops;
+-	host->irq = of_irq_get_byname(host->dev->of_node, "host-wake");
++	{
++		int _irq = of_irq_get_byname(host->dev->of_node, "host-wake");
++		host->irq = (_irq > 0) ? (unsigned int)_irq : 0;
++	}
+ #if SDIO_AUTO_SLEEP
+ 	// init delay sleep worker
+ 	INIT_DELAYED_WORK(&host->sleep_work, sleep_timer_expiry);
