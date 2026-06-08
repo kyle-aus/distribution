@@ -1,5 +1,13 @@
 --- a/src/sdio.c
 +++ b/src/sdio.c
+@@ -686,7 +686,7 @@ int rk915_sdio_init(struct host_io_info *phost)
+
+ reinit:
+-    if (!gfunc1) {
++    if (!gfunc1 || !gfunc2) {
+     	/* power up and rescan */
+     	rk915_poweron();
+     	mdelay(200);
 @@ -710,7 +710,11 @@ out:
 
  	host->io_ops = &sdio_host_ops;
