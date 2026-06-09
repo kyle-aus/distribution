@@ -939,13 +939,16 @@
 &internal_display {
     compatible = "rocknix,generic-dsi";
     panel_description =
-        "G size=153,85 delays=20,20,20,120,20 format=rgb888 lanes=4 flags=0xe03",
+        /* flags=0xa03: continuous DSI clock required for ST7703 720x720 panel.
+         * Non-continuous (0xe03) causes vblank timeout and black screen.
+         * Timings and delays from R36 Ultra stock DTB (rk3326-evb-lp3-v12-linux). */
+        "G size=153,85 delays=120,120,120,120,20 format=rgb888 lanes=4 flags=0xa03",
 
-        "M clock=50000 horizontal=720,140,80,140 vertical=720,20,4,20 default=1",
-        "M clock=50000 horizontal=720,140,100,140 vertical=720,20,150,20",
-        "M clock=50040 horizontal=720,140,112,140 vertical=720,20,140,20",
-        "M clock=51400 horizontal=720,140,132,140 vertical=720,20,148,20",
-        "M clock=50140 horizontal=720,140,90,140 vertical=720,20,40,20",
+        "M clock=45000 horizontal=720,140,80,140 vertical=720,20,4,20 default=1",
+        "M clock=45000 horizontal=720,140,100,140 vertical=720,20,59,20",
+        "M clock=45000 horizontal=720,140,125,140 vertical=720,20,40,20",
+        "M clock=47860 horizontal=720,140,122,140 vertical=720,20,93,20",
+        "M clock=49680 horizontal=720,140,125,140 vertical=720,20,8,20",
         "M clock=56900 horizontal=720,140,90,140 vertical=720,20,114,20",
         "M clock=50400 horizontal=720,140,92,140 vertical=720,20,10,20",
         "M clock=50220 horizontal=720,140,80,140 vertical=720,20,15,20",
